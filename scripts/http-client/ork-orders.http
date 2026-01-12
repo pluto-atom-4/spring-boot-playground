@@ -1,0 +1,14 @@
+### Valid API Key
+GET http://localhost:8080/work-orders/status
+X-API-KEY: secret123
+
+###
+
+### Missing API Key
+GET http://localhost:8080/work-orders/status
+
+###
+
+### Invalid API Key
+GET http://localhost:8080/work-orders/status
+X-API-KEY: wrong-key
