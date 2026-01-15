@@ -1,5 +1,7 @@
-package local.playground.springboot.contribution;
+package local.playground.springboot.contribution.repository;
 
+import local.playground.springboot.contribution.model.Contribution;
+import local.playground.springboot.contribution.model.ContributionCategoryMax;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,7 +17,7 @@ import java.util.Map;
  * team contribution metrics (max, avg, total, count) per category. This repository
  * follows the separation-of-concerns pattern: raw SQL execution is delegated to JPA
  * queries, while business logic (null-handling, aggregation, validation) is handled
- * in the service layer ({@link local.playground.springboot.service.ContributionService}).
+ * in the service layer ({@link local.playground.springboot.contribution.service.ContributionService}).
  * </p>
  *
  * <p>
@@ -48,7 +50,7 @@ import java.util.Map;
  * </ul>
  *
  * @see ContributionCategoryMax
- * @see local.playground.springboot.service.ContributionService
+ * @see local.playground.springboot.contribution.service.ContributionService
  * @since 1.0
  */
 @Repository
@@ -70,7 +72,7 @@ public interface ContributionRepository extends JpaRepository<Contribution, Long
      *
      * <p>
      * <b>Null-Handling:</b> If no contributions exist for a category, the repository may return
-     * null values. The service layer ({@link local.playground.springboot.service.ContributionService#getMaxContributionPerCategory(local.playground.springboot.service.ContributionService.NullHandling)})
+     * null values. The service layer ({@link local.playground.springboot.contribution.service.ContributionService#getMaxContributionPerCategory(local.playground.springboot.contribution.service.ContributionService.NullHandling)})
      * handles nulls according to the configured strategy (SKIP_NULLS or THROW_ON_NULL).
      * </p>
      *
@@ -99,7 +101,7 @@ public interface ContributionRepository extends JpaRepository<Contribution, Long
      *
      * <p>
      * <b>Query Logic:</b>
-     * Executes: {@code SELECT new local.playground.springboot.contribution.ContributionCategoryMax(c.category, MAX(c.value)) FROM Contribution c GROUP BY c.category}
+     * Executes: {@code SELECT new local.playground.springboot.contribution.model.ContributionCategoryMax(c.category, MAX(c.value)) FROM Contribution c GROUP BY c.category}
      * </p>
      *
      * <p>
@@ -119,9 +121,9 @@ public interface ContributionRepository extends JpaRepository<Contribution, Long
      *
      * @return list of {@link ContributionCategoryMax} records; empty list if no contributions exist
      * @see ContributionCategoryMax
-     * @see local.playground.springboot.service.ContributionService#getMaxContributionPerCategoryFromTyped()
+     * @see local.playground.springboot.contribution.service.ContributionService#getMaxContributionPerCategoryFromTyped()
      */
-    @Query("SELECT new local.playground.springboot.contribution.ContributionCategoryMax(c.category, MAX(c.value)) " +
+    @Query("SELECT new local.playground.springboot.contribution.model.ContributionCategoryMax(c.category, MAX(c.value)) " +
            "FROM Contribution c GROUP BY c.category")
     List<ContributionCategoryMax> findMaxContributionPerCategoryTyped();
 
@@ -186,7 +188,7 @@ public interface ContributionRepository extends JpaRepository<Contribution, Long
      * </p>
      *
      * @return list of maps with "category" and "avgValue" keys; empty list if no contributions exist
-     * @see local.playground.springboot.service.ContributionService#getAverageContributionPerCategory()
+     * @see local.playground.springboot.contribution.service.ContributionService#getAverageContributionPerCategory()
      */
     @Query("SELECT c.category AS category, AVG(c.value) AS avgValue FROM Contribution c GROUP BY c.category")
     List<Map<String, Object>> findAvgContributionPerCategory();
@@ -218,7 +220,7 @@ public interface ContributionRepository extends JpaRepository<Contribution, Long
      * </p>
      *
      * @return list of maps with "category" and "totalValue" keys; empty list if no contributions exist
-     * @see local.playground.springboot.service.ContributionService#getTotalContributionPerCategory()
+     * @see local.playground.springboot.contribution.service.ContributionService#getTotalContributionPerCategory()
      */
     @Query("SELECT c.category AS category, SUM(c.value) AS totalValue FROM Contribution c GROUP BY c.category")
     List<Map<String, Object>> findTotalContributionPerCategory();
@@ -250,8 +252,9 @@ public interface ContributionRepository extends JpaRepository<Contribution, Long
      * </p>
      *
      * @return list of maps with "category" and "countValue" keys; empty list if no contributions exist
-     * @see local.playground.springboot.service.ContributionService#getCountPerCategory()
+     * @see local.playground.springboot.contribution.service.ContributionService#getCountPerCategory()
      */
     @Query("SELECT c.category AS category, COUNT(c) AS countValue FROM Contribution c GROUP BY c.category")
     List<Map<String, Object>> findCountPerCategory();
 }
+

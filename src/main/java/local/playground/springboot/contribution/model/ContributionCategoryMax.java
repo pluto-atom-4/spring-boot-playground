@@ -1,4 +1,4 @@
-package local.playground.springboot.contribution;
+package local.playground.springboot.contribution.model;
 
 /**
  * Typed projection (DTO) record for aggregated max contribution per category.
@@ -24,7 +24,7 @@ package local.playground.springboot.contribution;
  * </p>
  * <pre>
  * {@code
- * @Query("SELECT new local.playground.springboot.contribution.ContributionCategoryMax(c.category, MAX(c.value)) " +
+ * @Query("SELECT new local.playground.springboot.contribution.model.ContributionCategoryMax(c.category, MAX(c.value)) " +
  *        "FROM Contribution c GROUP BY c.category")
  * List<ContributionCategoryMax> findMaxContributionPerCategoryTyped();
  * }
@@ -38,7 +38,7 @@ package local.playground.springboot.contribution;
  *   <li>{@code maxValue} – the maximum contribution value in that category (may be null)</li>
  * </ul>
  *
- * @see ContributionRepository#findMaxContributionPerCategoryTyped()
+ * @see local.playground.springboot.contribution.repository.ContributionRepository#findMaxContributionPerCategoryTyped()
  * @since 1.0
  */
 public record ContributionCategoryMax(String category, Integer maxValue) {

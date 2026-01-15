@@ -1,6 +1,7 @@
-package local.playground.springboot.service;
+package local.playground.springboot.contribution.service;
 
-import local.playground.springboot.contribution.ContributionRepository;
+import local.playground.springboot.contribution.repository.ContributionRepository;
+import local.playground.springboot.contribution.service.ContributionServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,4 +1,4 @@
-package local.playground.springboot.contribution;
+package local.playground.springboot.contribution.model;
 
 import jakarta.persistence.*;
 import java.util.Objects;

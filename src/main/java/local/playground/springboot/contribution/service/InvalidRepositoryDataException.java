@@ -1,4 +1,4 @@
-package local.playground.springboot.service;
+package local.playground.springboot.contribution.service;
 
 /**
  * Exception thrown when repository returns invalid or unexpected data (nulls or wrong types) that

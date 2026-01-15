@@ -1,6 +1,9 @@
-package local.playground.springboot.service;
+package local.playground.springboot.contribution.service;
 
-import local.playground.springboot.contribution.ContributionRepository;
+import local.playground.springboot.contribution.repository.ContributionRepository;
+import local.playground.springboot.contribution.service.ContributionService;
+import local.playground.springboot.contribution.service.ContributionServiceImpl;
+import local.playground.springboot.contribution.service.InvalidRepositoryDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

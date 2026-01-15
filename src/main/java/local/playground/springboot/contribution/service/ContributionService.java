@@ -1,7 +1,7 @@
-package local.playground.springboot.service;
+package local.playground.springboot.contribution.service;
 
-import local.playground.springboot.contribution.Contribution;
-import local.playground.springboot.contribution.ContributionCategoryMax;
+import local.playground.springboot.contribution.model.Contribution;
+import local.playground.springboot.contribution.model.ContributionCategoryMax;
 
 import java.util.List;
 import java.util.Map;
